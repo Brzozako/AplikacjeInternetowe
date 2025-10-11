@@ -1,0 +1,96 @@
+:root {
+    --bg: #f5ede6;
+    --panel1: #c77dbb;
+    --panel2: #14303c;
+    --panel3: #fa6312;
+    --panel4: #2ec4e6;
+    --panel5: #fff;
+    --text-dark: #14303c;
+    --text-light: #fff;
+    --max-width: 1200px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    background: linear-gradient(90deg, var(--panel1) 33%, var(--panel2) 33% 66%, var(--panel1) 66%);
+    color: var(--text-light);
+    font-size: 2.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+}
+
+section:nth-child(1) { background: var(--panel2); color: var(--text-light); }
+section:nth-child(2) { background: var(--panel3); color: var(--text-light); }
+section:nth-child(3) { background: var(--panel4); color: var(--text-light); }
+section:nth-child(4) { background: var(--panel5); color: var(--text-dark); }
+
+section {
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    padding: 2rem;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+h1, h2, h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 0;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 1.2rem; }
+h2 { font-size: 1.7rem; margin-bottom: 1rem; }
+h3 { font-size: 1.2rem; margin-top: 1.2rem; }
+
+ul {
+    background: var(--panel3);
+    color: var(--text-light);
+    border-radius: 0.5rem;
+    padding: 1rem 1.3rem;
+    margin-top: 1rem;
+}
+
+.page-footer {
+    background: var(--panel2);
+    color: var(--panel1);
+    text-align: center;
+    padding: 1.2rem 1rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .page-header {
+        font-size: 1.5rem;
+        height: 140px;
+    }
+    section {
+        min-height: 180px;
+    }
+}
