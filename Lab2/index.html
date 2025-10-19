@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="todo.js" defer></script>
+</head>
+<body>
+<main class="todo-app">
+    <header>
+        <h1>To-Do-List 📝</h1>
+    </header>
+
+    <!-- pole wyszukiwarki -->
+    <section class="search">
+        <label for="search" class="sr-only">Szukaj</label>
+        <input id="search" type="search" placeholder="Szukaj...">
+    </section>
+
+    <!-- lista zadań -->
+    <section class="list-section">
+        <ul id="task-list">
+            <li data-id="1">
+                <span class="text">Kup mleko dla ZUT</span>
+                <span class="due">2025-11-01</span>
+                <button class="delete" aria-label="Usuń">🗑️</button>
+            </li>
+            <li data-id="2">
+                <span class="text">Zadzwonić do ZUTu</span>
+                <span class="due"></span>
+                <button class="delete" aria-label="Usuń">🗑️</button>
+            </li>
+            <li data-id="3">
+                <span class="text">Przygotować prezentację na ZUT</span>
+                <span class="due">2025-12-15</span>
+                <button class="delete" aria-label="Usuń">🗑️</button>
+            </li>
+        </ul>
+    </section>
+
+    <!-- formularz dodawania zadania -->
+    <form id="add-form" class="add-form">
+        <label for="new-task" class="sr-only">Nowe zadanie</label>
+        <input id="new-task" type="text" placeholder="Dodaj element do listy ✍️" minlength="3" maxlength="80" required>
+        <!-- <label for="new-due" class="sr-only">Termin wykonania</label> -->
+        <input id="new-due" type="date">
+        <button id="add-btn" type="submit">Zapisz 💾</button>
+    </form>
+
+</main>
+</body>
+</html>
