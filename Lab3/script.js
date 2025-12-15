@@ -87,63 +87,21 @@ function getUserLocation() {
 function exportMap() {
     document.getElementById('locationInfo').innerHTML = 'Eksportowanie mapy...';
 
-    const bounds = map.getBounds();
-    const zoom = map.getZoom();
-    const center = map.getCenter();
-
-    const canvas = document.createElement('canvas');
-    canvas.width = 640;
-    canvas.height = 640;
-    const ctx = canvas.getContext('2d');
-
-    const exportDiv = document.createElement('div');
-    exportDiv.style.width = '640px';
-    exportDiv.style.height = '640px';
-    exportDiv.style.position = 'absolute';
-    exportDiv.style.left = '-9999px';
-    document.body.appendChild(exportDiv);
-
-    const exportMap = L.map(exportDiv, {
-        zoomControl: false,
-        attributionControl: false
-    }).setView(center, zoom);
-
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: '',
-        maxZoom: 19
-    }).addTo(exportMap);
-
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-        attribution: '',
-        maxZoom: 19
-    }).addTo(exportMap);
-
-    setTimeout(() => {
-        html2canvas(exportDiv, {
-            useCORS: true,
-            allowTaint: true,
-            logging: false,
-            width: 640,
-            height: 640
-        }).then(canvas => {
-            mapImageDataUrl = canvas.toDataURL('image/png');
-
-            exportMap.remove();
-            document.body.removeChild(exportDiv);
-
-            document.getElementById('locationInfo').innerHTML =
-                '<strong>Sukces!</strong> Mapa została wyeksportowana. Możesz teraz rozpocząć puzzle.';
-
-            document.getElementById('startPuzzle').disabled = false;
-        }).catch(error => {
-            exportMap.remove();
-            document.body.removeChild(exportDiv);
-
+    leafletImage(map, function(err, canvas) {
+        if (err) {
             document.getElementById('locationInfo').innerHTML =
                 '<strong>Błąd:</strong> Nie udało się wyeksportować mapy.';
-            console.error('Błąd eksportu:', error);
-        });
-    }, 1000);
+            console.error('Błąd eksportu:', err);
+            return;
+        }
+
+        mapImageDataUrl = canvas.toDataURL('image/png');
+
+        document.getElementById('locationInfo').innerHTML =
+            '<strong>Sukces!</strong> Mapa została wyeksportowana. Możesz teraz rozpocząć puzzle.';
+
+        document.getElementById('startPuzzle').disabled = false;
+    });
 }
 
 
